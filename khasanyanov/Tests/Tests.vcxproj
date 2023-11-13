@@ -131,11 +131,11 @@
     <ClCompile Include="Tests.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\mp2-lab3-postfix\khasanyanov\gtest\gtest.vcxproj">
-      <Project>{60932afc-7808-48b7-b3bf-f2bc151c0065}</Project>
-    </ProjectReference>
     <ProjectReference Include="..\Cluster\Cluster.vcxproj">
       <Project>{d74009ff-7958-41dd-84a0-1236f1cc53ee}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\gtest\gtest.vcxproj">
+      <Project>{60932afc-7808-48b7-b3bf-f2bc151c0065}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
