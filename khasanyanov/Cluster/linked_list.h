@@ -12,7 +12,7 @@ class LinkedList {
 		TELEM data;
 	public:
 		Node() = delete;
-		Node(TELEM d) : datd(d) {next = prev = nullptr;}
+		Node(TELEM d) : data(d) {next = prev = nullptr;}
 	};
 private:
 	Node* front, * back;
