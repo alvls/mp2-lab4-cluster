@@ -1,9 +1,11 @@
 ﻿#include "cluster.h"
+#include <iostream>
 
-Cluster::Cluster() : Cluster(64, 1000) {}
+Cluster::Cluster() : Cluster(64, 100) {}
 
 Cluster::Cluster(size_t N, size_t T): nodes(N), tacts(T), busy_nodes(0) {
-	lambda = (rand() % 1000) / 1000.;
+	srand(time(NULL));
+	lambda = rand() % 1000;
 }
 
 void Cluster::start(){
@@ -11,6 +13,7 @@ void Cluster::start(){
 		generate_tasks();
 		process_tasks();
 	}
+	update_stat();
 }
 
 void Cluster::process_tasks(){	
@@ -18,7 +21,7 @@ void Cluster::process_tasks(){
 		busy_nodes += queue.first().get_nodes();
 		tasks.push_back(queue.get());
 	}
-	statistic.I += busy_nodes / nodes;
+	statistic.I += static_cast<double>(busy_nodes) / nodes;
 	if(!tasks.empty())
 	{
 		size_t size = tasks.size();
@@ -36,10 +39,11 @@ void Cluster::process_tasks(){
 
 void Cluster::generate_tasks(){
 	srand(time(NULL));
-	size_t k = 1 + rand() % MaxTasksForTact;
+	size_t k = rand() % MaxTasksForTact;
 	for (size_t i = 0; i < k; i++) {
-		size_t l = (rand() % 1000);
-		if (l < size_t(lambda * 1000))
+		size_t l = rand() % 1000;
+		std::cout << "lambda=" << lambda << ", l: " << l << std::endl;
+		if (l < lambda)
 			queue.add({nodes});
 	}
 }

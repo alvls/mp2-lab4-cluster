@@ -14,6 +14,5 @@ TEST(Cluster, test) {
 		cout << c.get_stat().I << endl;
 		count++;
 	}
-	c.get_stat();
 	ASSERT_NO_THROW(c.start());
 }

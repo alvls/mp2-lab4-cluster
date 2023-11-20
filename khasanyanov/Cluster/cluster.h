@@ -5,15 +5,15 @@
 #include "queue.h"
 #include <vector>
 
-#define MaxTasksForTact 5
+const size_t MaxTasksForTact = 5;
 
 using namespace std;
 
 class Cluster {
 	struct Statistic {
-		size_t executed_tasks = 0, 
-		failed_tasks = 0, 
-		summary_tasks = 0;
+		size_t executed_tasks = 0;
+		size_t failed_tasks = 0;
+		size_t summary_tasks = 0;
 		double I = 0.0;                  //процент загрузки
 	};
 private:
@@ -22,7 +22,7 @@ private:
 	size_t busy_nodes;
 	Queue<Task> queue;
 	vector<Task> tasks;
-	double lambda;
+	size_t lambda;
 	Statistic statistic;
 public:
 	Cluster();

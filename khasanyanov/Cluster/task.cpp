@@ -4,7 +4,7 @@
 Task::Task(size_t Nodes) : closed(0) {
 	srand(time(NULL));
 	number = rand() % 1000;
-	tacts = 1;//+ rand() % (DefValue - 1);
+	tacts = 1 + (rand() % (DefValue - 1));
 	nodes = 1 + rand() % (Nodes - 1);
 }
 
