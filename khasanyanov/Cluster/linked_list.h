@@ -25,8 +25,8 @@ public:
 	void push_back(TELEM el);
 	void pop_front();
 	void pop_back();
-	TELEM get_front();
-	TELEM get_back();
+	TELEM& get_front();
+	TELEM& get_back();
 	size_t get_size();
 	void  erase(int index);
 	void insert(int index,const TELEM& el);
@@ -93,10 +93,10 @@ void LinkedList<TELEM>::pop_back() {
 }
 
 template <class TELEM>
-TELEM LinkedList<TELEM>::get_front()  { if (empty()) throw out_of_range("List is empty"); return front->data; }
+TELEM& LinkedList<TELEM>::get_front()  { if (empty()) throw out_of_range("List is empty"); return front->data; }
 
 template <class TELEM>
-TELEM LinkedList<TELEM>::get_back()  { if (empty()) throw out_of_range("List is empty"); return back->data; }
+TELEM& LinkedList<TELEM>::get_back()  { if (empty()) throw out_of_range("List is empty"); return back->data; }
 
 template <class TELEM>
 void LinkedList<TELEM>::erase(int index) {
@@ -148,7 +148,7 @@ template <class TELEM>
 LinkedList<TELEM>::~LinkedList() { while (!empty()) pop_back(); }
 
 template <class TELEM>
-LinkedList<TELEM>::Node* LinkedList<TELEM>::at(const size_t index) {
+typename LinkedList<TELEM>::Node* LinkedList<TELEM>::at(const size_t index) {
 	Node* tmp = front;
 	for (size_t i = 0; i != index; i++) {
 		if (tmp == nullptr)
@@ -158,3 +158,4 @@ LinkedList<TELEM>::Node* LinkedList<TELEM>::at(const size_t index) {
 	return tmp;
 }
 #endif
+

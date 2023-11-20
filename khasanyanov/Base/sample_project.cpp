@@ -1,6 +1,11 @@
 ﻿#include <iostream>
+#include "cluster.h"
+
+using namespace std;
 
 int main()
 {
-    std::cout << size_t(2);
+    Cluster c;
+    c.start();
+    cout << c.get_stat().executed_tasks << endl <<  c.get_stat().failed_tasks << endl << c.get_stat().summary_tasks << endl << c.get_stat().I << endl;
 }
