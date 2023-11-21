@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="tests_cluster.cpp" />
     <ClCompile Include="tests_queue.cpp" />
     <ClCompile Include="test_main.cpp" />
     <ClCompile Include="tests_linkedlist.cpp" />

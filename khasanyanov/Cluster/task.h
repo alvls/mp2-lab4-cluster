@@ -4,7 +4,7 @@
 #include"queue.h"
 #include <ctime>
 
-#define DefValue 10
+const size_t MaxTactsOfTask = 6;
 
 using namespace std;
 

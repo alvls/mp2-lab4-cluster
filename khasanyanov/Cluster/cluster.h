@@ -5,7 +5,7 @@
 #include "queue.h"
 #include <vector>
 
-const size_t MaxTasksForTact = 5;
+
 
 using namespace std;
 
@@ -14,9 +14,12 @@ class Cluster {
 		size_t executed_tasks = 0;
 		size_t failed_tasks = 0;
 		size_t summary_tasks = 0;
+		size_t free_tacts = 0;
 		double I = 0.0;                  //процент загрузки
 	};
 private:
+	const size_t MMinValueOfLambda = 333;
+	const size_t MaxTasksForTact = 3;
 	size_t nodes;
 	size_t tacts;
 	size_t busy_nodes;
@@ -24,15 +27,19 @@ private:
 	vector<Task> tasks;
 	size_t lambda;
 	Statistic statistic;
-public:
-	Cluster();
-	Cluster(size_t N, size_t T);
-	void start();
 	void process_tasks();
 	void generate_tasks();
 	void update_stat();
+public:
+	Cluster();
+	Cluster(size_t N, size_t T);
+	Cluster(size_t N, size_t T, double L);
+	void start();
 	Statistic get_stat() const;
-
+	size_t get_nodes() const noexcept;
+	size_t get_busy_nodes() const noexcept;
+	double get_lambda() const noexcept;
+	vector<Task> get_tasks() const;
 };
 
 #endif
