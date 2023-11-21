@@ -1,0 +1,6 @@
+C:/ПРОГА/mp2-lab4-cluster/CMakeFiles/test_source.dir
+C:/ПРОГА/mp2-lab4-cluster/CMakeFiles/sample.dir
+C:/ПРОГА/mp2-lab4-cluster/CMakeFiles/gtest.dir
+C:/ПРОГА/mp2-lab4-cluster/CMakeFiles/include.dir
+C:/ПРОГА/mp2-lab4-cluster/CMakeFiles/ALL_BUILD.dir
+C:/ПРОГА/mp2-lab4-cluster/CMakeFiles/ZERO_CHECK.dir
