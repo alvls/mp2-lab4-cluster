@@ -6,17 +6,17 @@
 using namespace std;
 
 template<class TELEM>
-class Queue {
-	LinkedList<TELEM> data;
-public:
-	Queue();
-	void add(const TELEM& el);
-	TELEM get();
-	TELEM operator[](const size_t index);
-	size_t size();
-	TELEM& first();
-	TELEM& last();
-	inline bool empty();
+class Queue {							   
+	LinkedList<TELEM> data;				  // данные 
+public:									  
+	Queue();							  // конструктор по умолчанию
+	void add(const TELEM& el);			  // добавить элемент (в конец очереди)
+	TELEM get();						  // получить елемент (первый из очереди)
+	TELEM operator[](const size_t index); // получить значение элемента по индексу
+	size_t size();						  // получить размер очереди (кол-во элементов)
+	TELEM& first();						  // ссылка на первый элемент
+	TELEM& last();						  // ссылка на последний элемент
+	inline bool empty();                  // проверка на отсутствие элементов в очереди
 };
 
 template<class TELEM>

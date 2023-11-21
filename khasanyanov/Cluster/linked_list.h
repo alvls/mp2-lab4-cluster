@@ -7,30 +7,31 @@ using namespace std;
 
 template <class TELEM>
 class LinkedList {
-	struct Node {
-		Node* next, * prev;
-		TELEM data;
-		Node() = delete;
-		Node(TELEM d) : data(d) {next = prev = nullptr;}
-	};
-private:
-	Node* front, * back;
-	size_t size = 0;
-	Node* at(const size_t index);
-public:
-	LinkedList();
-	~LinkedList();
-	bool empty();
-	void push_front(TELEM el);
-	void push_back(TELEM el);
-	void pop_front();
-	void pop_back();
-	TELEM& get_front();
-	TELEM& get_back();
-	size_t get_size();
-	void  erase(int index);
-	void insert(int index,const TELEM& el);
-	TELEM operator[](const size_t index);
+	struct Node {                           // узел
+		Node* next, * prev;                 // указатель на предущий и следующий узел
+		TELEM data;                         // данные узла
+		Node() = delete;                    // конструктор по умолчанию недоступен
+		Node(TELEM d);                      // конструктор-инициализатор
+	};									   
+private:								   
+	Node* front, * back;                    // указатели на первый и последний элемент списка
+	size_t size = 0;						// кол-во элементов в списке
+	Node* at(const size_t index);			// получить узел по индексу 
+public:										
+	LinkedList();							// конструктор по умолчанию
+	~LinkedList();							// деструктор
+	bool empty();							// проверка на пустоту списка
+	void push_front(TELEM el);				// добавить элемент в начало
+	void push_back(TELEM el);				// добавить элемент в конец
+	void pop_front();						// удалить первый элемент
+	void pop_back();						// удалить второй элемент
+	void  erase(int index);					// удалить элемент по индексу
+	void insert(int index,const TELEM& el); // вставить элемент по индексу
+	TELEM operator[](const size_t index);   // получить значение элемента по индексу
+	                                        // геттеры
+	TELEM& get_front();						
+	TELEM& get_back();						
+	size_t get_size();						
 };
 
 template <class TELEM>
@@ -157,5 +158,8 @@ typename LinkedList<TELEM>::Node* LinkedList<TELEM>::at(const size_t index) {
 	}
 	return tmp;
 }
+
+template <class TELEM>
+LinkedList<TELEM>::Node::Node(TELEM d) : data(d) { next = prev = nullptr; }
 #endif
 
