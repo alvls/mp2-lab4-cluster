@@ -19,6 +19,7 @@ private:
 	Node* at(const size_t index);			// получить узел по индексу 
 public:										
 	LinkedList();							// конструктор по умолчанию
+	LinkedList(const LinkedList& l);        // конструктор копирования
 	~LinkedList();							// деструктор
 	bool empty();							// проверка на пустоту списка
 	void push_front(TELEM el);				// добавить элемент в начало
@@ -36,6 +37,22 @@ public:
 
 template <class TELEM>
 inline LinkedList<TELEM>::LinkedList() { front = back = nullptr; }
+
+template <class TELEM>
+inline LinkedList<TELEM>::LinkedList(const LinkedList& l) : size(l.size) {
+	if (!l.front) {
+		front = back = nullptr;
+		return;
+	}
+	Node* current, * c_l = l.front;
+	front = current = new Node{ l.front->data };
+	while (c_l->next) {
+		current->next = new Node{ c_l->data };
+		current = current->next;
+		c_l = c_l->next;
+	}
+	back = current;
+}
 
 template <class TELEM>
 bool LinkedList<TELEM>::empty() { return (front == nullptr && back == nullptr); }

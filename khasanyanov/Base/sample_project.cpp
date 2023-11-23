@@ -7,31 +7,27 @@
 
 using namespace std;
 
-int main()
+void main()
 {
     Console::init();
+    setlocale(LC_ALL, "ru");
     Console::textcolor(Console::TColor::GREEN);
-    
     system("title Имитация работы кластера");
-    Cluster c;
+    cout << "Введите количество узлов кластера:" << endl;
+    cout << "Введите количество тактов работы:" << endl;
+    cout << "Введите вероятность появления задачи на такте:" << endl;
+    size_t nodes, tacts;
+    double lambda;
+    Console::gotoxy(35, 0);
+    cin >> nodes;
+    Console::gotoxy(34, 1);
+    cin >> tacts;
+    Console::gotoxy(47, 2);
+    cin >> lambda;
+    Cluster c(nodes, tacts, lambda);
     Visualizer v(c);
     Console::hidecursor();
-    Console::set_pixel_foreground(Console::RED);
-    c.start([&]() {Console::clear(); v.draw(); Console::flush();});// [&]() {console.clear();  cout << "Такт номер: " << c.get_stat().T << " " << "Выполнено задач: " << c.get_stat().executed_tasks << endl; console.flush(); });
-    int i = 0;
-   
-    /*while (i < 100) {
-        Console::clear();
-        Console::write(1, 0, L"█");
-        v.draw();
-        Console::flush();
-        i++;
-        Sleep(1000);
-    }*/
-    /*cout << "Выполнено задач: " << c.get_stat().executed_tasks << endl;
-    cout << "Не выполнено задач: " << c.get_stat().failed_tasks << endl;
-    cout << "Всего задач: " << c.get_stat().summary_tasks << endl;
-    cout << "Тактов простоя: " << c.get_stat().free_tacts << endl;
-    cout << "Средняя загрузка кластера: " << c.get_stat().I * 100. << "%" << endl;*/
-    return 0;
+    c.start([&]() {Console::clear(); v.draw(0,0); Console::flush(); Sleep(10); });
+    v.draw_result(0, 0);
+    Console::gotoxy(0, 6);
 }

@@ -10,7 +10,7 @@ Cluster::Cluster(size_t N, size_t T): nodes(N), tacts(T), busy_nodes(0) {
 }
 
 Cluster::Cluster(size_t N, size_t T, double L) : nodes(N), tacts(T), busy_nodes(0), lambda(L) { 
-	if (N <= 0 || T <= 0 || lambda <= 0) throw invalid_argument("invalid params"); 
+	if (N <= 0 || N > MaxValueOfNodes || T <= 0 || lambda <= 0) throw invalid_argument("invalid params"); 
 }
 
 size_t Cluster::get_nodes() const noexcept { return nodes; }
@@ -61,7 +61,6 @@ void Cluster::generate_tasks(){
 	size_t k = rand() % MaxTasksForTact;
 	for (size_t i = 0; i < k; i++) {
 		double l = static_cast<double>((rand() % 1000)) / 1000;
-		//cout << lambda << "  " << l << endl;
 		if (l < lambda)
 			queue.add({nodes});
 	}
