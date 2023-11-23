@@ -4,6 +4,7 @@
 #include "task.h"
 #include "queue.h"
 #include <vector>
+#include <functional>
 
 
 
@@ -15,33 +16,35 @@ class Cluster {
 		size_t failed_tasks = 0;			// невыполненные задачи
 		size_t summary_tasks = 0;			// общее кол-во задач
 		size_t free_tacts = 0;				// такты простоя
+		size_t T = 1;
 		double I = 0.0;                     // процент загрузки
 	};										 
 private:									 
-	const size_t MMinValueOfLambda = 333;	// нижняя граница лямбды
+	const double MinValueOfLambda = 0.333;	// нижняя граница лямбды
 	const size_t MaxTasksForTact = 3;		// максимальное количество новых задач за такт
 	size_t nodes;							// кол-во узлов
 	size_t tacts;							// кол-во тактов работы кластера
 	size_t busy_nodes;						// занятые узлы
 	Queue<Task> queue;						// очередь задач
 	vector<Task> tasks;						// выполняемые задачи
-	size_t lambda;							// вероятность появления задачи на такте
+	double lambda;							// вероятность появления задачи на такте
 	Statistic statistic;					// статистика
 	void process_tasks();					// выполнение задач
 	void generate_tasks();					// генерация задач
 	void update_stat();						// подсчёт статистики
-public:										 
+public:
+	friend class Visualiser;
 	Cluster();								// конструктор по умолчанию
 	Cluster(size_t N, size_t T);			// конструктор-инициализатор
 	Cluster(size_t N, size_t T, double L);	// конструктор-инициализатор
-	void start();							// запуск работы кластера
-	Statistic get_stat() const;	
+	void start(function<void(void)>& f);	// запуск работы кластера
 											//геттеры
 	size_t get_nodes() const noexcept;		
 	size_t get_tacts() const noexcept;		
 	size_t get_busy_nodes() const noexcept; 
 	double get_lambda() const noexcept;
-	vector<Task> get_tasks() const;         
+	vector<Task> get_tasks() const;
+	Statistic get_stat() const;
 };
 
 #endif

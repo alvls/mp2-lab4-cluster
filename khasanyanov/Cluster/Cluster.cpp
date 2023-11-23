@@ -6,10 +6,10 @@ Cluster::Cluster() : Cluster(64, 1000) {}
 Cluster::Cluster(size_t N, size_t T): nodes(N), tacts(T), busy_nodes(0) {
 	if (N <= 0 || T <= 0) throw invalid_argument("invalid params");
 	srand(time(NULL));
-	lambda = rand() % 1000;
+	lambda = static_cast<double> (MinValueOfLambda + (rand() % (1000 - ((int)MinValueOfLambda * 1000)))) / 1000;
 }
 
-Cluster::Cluster(size_t N, size_t T, double L) : nodes(N), tacts(T), busy_nodes(0), lambda(L * 1000) { 
+Cluster::Cluster(size_t N, size_t T, double L) : nodes(N), tacts(T), busy_nodes(0), lambda(L) { 
 	if (N <= 0 || T <= 0 || lambda <= 0) throw invalid_argument("invalid params"); 
 }
 
@@ -17,15 +17,16 @@ size_t Cluster::get_nodes() const noexcept { return nodes; }
 
 size_t Cluster::get_busy_nodes() const noexcept { return busy_nodes; }
 
-double Cluster::get_lambda() const noexcept { return static_cast<double>(lambda) / 1000; }
+double Cluster::get_lambda() const noexcept { return lambda; }
 
 size_t Cluster::get_tacts() const noexcept { return tacts; }
 
 vector<Task> Cluster::get_tasks() const { return tasks; }
 
-void Cluster::start(){
-	for(size_t i = tacts; i > 0; i--) {
+void Cluster::start(function<void(void)>& f) {
+	for(statistic.T ; statistic.T < tacts + 1; statistic.T++) {
 		generate_tasks();
+		if (f) f();
 		process_tasks();
 	}
 	update_stat();
@@ -57,7 +58,8 @@ void Cluster::process_tasks(){
 void Cluster::generate_tasks(){
 	size_t k = rand() % MaxTasksForTact;
 	for (size_t i = 0; i < k; i++) {
-		size_t l = rand() % 1000;
+		double l = static_cast<double>((rand() % 1000)) / 1000;
+		//cout << lambda << "  " << l << endl;
 		if (l < lambda)
 			queue.add({nodes});
 	}
