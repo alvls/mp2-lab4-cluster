@@ -152,15 +152,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="cluster.h" />
-    <ClInclude Include="console.h" />
     <ClInclude Include="task.h" />
     <ClInclude Include="queue.h" />
     <ClInclude Include="linked_list.h" />
-    <ClInclude Include="visualiser.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cluster.cpp" />
-    <ClCompile Include="console.cpp" />
     <ClCompile Include="task.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

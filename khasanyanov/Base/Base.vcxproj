@@ -140,12 +140,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Cluster\console.cpp" />
     <ClCompile Include="sample_project.cpp" />
+    <ClCompile Include="visualizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cluster\Cluster.vcxproj">
       <Project>{d74009ff-7958-41dd-84a0-1236f1cc53ee}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Cluster\console.h" />
+    <ClInclude Include="..\Cluster\visualizer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

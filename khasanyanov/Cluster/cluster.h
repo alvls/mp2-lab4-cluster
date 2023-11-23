@@ -33,7 +33,6 @@ private:
 	void generate_tasks();					// генерация задач
 	void update_stat();						// подсчёт статистики
 public:
-	friend class Visualiser;
 	Cluster();								// конструктор по умолчанию
 	Cluster(size_t N, size_t T);			// конструктор-инициализатор
 	Cluster(size_t N, size_t T, double L);	// конструктор-инициализатор

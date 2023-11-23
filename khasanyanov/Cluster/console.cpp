@@ -31,7 +31,7 @@ void Console::write(int x, int y, std::wstring s) {
 }
 
 void Console::set_pixel(int x, int y, wchar_t value) {
-    buf[y * buf_info.dwSize.X + x].Char.AsciiChar = value;
+    buf[y * buf_info.dwSize.X + x].Char.UnicodeChar = value;
     buf[y * buf_info.dwSize.X + x].Attributes = attr;
 }
 
