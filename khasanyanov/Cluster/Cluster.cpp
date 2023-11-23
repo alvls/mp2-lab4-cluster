@@ -23,11 +23,13 @@ size_t Cluster::get_tacts() const noexcept { return tacts; }
 
 vector<Task> Cluster::get_tasks() const { return tasks; }
 
-void Cluster::start(function<void(void)>& f) {
+Queue<Task> Cluster::get_queue() const { return queue; }
+
+void Cluster::start(const function<void(void)>& f) {
 	for(statistic.T ; statistic.T < tacts + 1; statistic.T++) {
 		generate_tasks();
-		if (f) f();
 		process_tasks();
+		if (f) f();
 	}
 	update_stat();
 }

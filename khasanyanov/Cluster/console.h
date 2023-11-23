@@ -11,15 +11,14 @@
 class Console
 {
 private:
-    HANDLE hConsole;
-    CONSOLE_SCREEN_BUFFER_INFO buf_info;
-    COORD buf_coord = { 0, 0 };
-    CHAR_INFO* buf;
-    int buf_size;
-
-    int background = BLACK;
-    int foreground = LIGHTGRAY;
-    int attr = background * 16 + foreground;
+    static HANDLE hConsole;
+    static CONSOLE_SCREEN_BUFFER_INFO buf_info;
+    static COORD buf_coord;
+    static CHAR_INFO* buf;
+    static int buf_size;
+    static int background;
+    static int foreground;
+    static int attr;
 
 public:
     enum TColor {
@@ -28,27 +27,27 @@ public:
         LIGHTMAGENTA, YELLOW, WHITE
     };
 
-    Console();
-    int wherex();
-    int wherey();
-    COORD wherexy();
-    void clrscr();
-    void gotoxy(int x, int y);
-    void textcolor(int color);
-    void textbackground(int color);
-    void textattr(int color);
-    void setwindow(int width, int height);
-    void setWindow(SMALL_RECT rect, COORD size);
-    void getwindow(SMALL_RECT* rect, COORD* size);
-    void hidecursor();
-    void showcursor();
-    void flush();
-    void clear();
-    void write(int x, int y, std::wstring s);
-    void set_pixel(int x, int y, wchar_t value);
-    void set_pixel_foreground(int color);
-    void set_pixel_background(int color);
-    ~Console();
+    static void init();
+    static int wherex();
+    static int wherey();
+    static COORD wherexy();
+    static void clrscr();
+    static void gotoxy(int x, int y);
+    static void textcolor(int color);
+    static void textbackground(int color);
+    static void textattr(int color);
+    static void setwindow(int width, int height);
+    static void setWindow(SMALL_RECT rect, COORD size);
+    static void getwindow(SMALL_RECT* rect, COORD* size);
+    static void hidecursor();
+    static void showcursor();
+    static void flush();
+    static void clear();
+    static void write(int x, int y, std::wstring s);
+    static void set_pixel(int x, int y, wchar_t value);
+    static void set_pixel_foreground(int color);
+    static void set_pixel_background(int color);
+    static void free();
 };
 
 #endif

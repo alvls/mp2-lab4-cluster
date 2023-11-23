@@ -9,24 +9,25 @@ using namespace std;
 
 int main()
 {
-    Console console;
-    console.textcolor(Console::TColor::GREEN);
+    Console::init();
+    Console::textcolor(Console::TColor::GREEN);
     
     system("title Имитация работы кластера");
     Cluster c;
-    Visualizer v(c ,console);
-    console.hidecursor();
-    //c.start([&]() {console.clear();  cout << "Такт номер: " << c.get_stat().T << " " << "Выполнено задач: " << c.get_stat().executed_tasks << endl; console.flush(); });
+    Visualizer v(c);
+    Console::hidecursor();
+    Console::set_pixel_foreground(Console::RED);
+    c.start([&]() {Console::clear(); v.draw(); Console::flush();});// [&]() {console.clear();  cout << "Такт номер: " << c.get_stat().T << " " << "Выполнено задач: " << c.get_stat().executed_tasks << endl; console.flush(); });
     int i = 0;
-    console.set_pixel_foreground(Console::RED);
-    while (i < 100) {
-        console.clear();
-        console.write(1, 0, L"█");
-        //v.draw();
-        console.flush();
+   
+    /*while (i < 100) {
+        Console::clear();
+        Console::write(1, 0, L"█");
+        v.draw();
+        Console::flush();
         i++;
         Sleep(1000);
-    }
+    }*/
     /*cout << "Выполнено задач: " << c.get_stat().executed_tasks << endl;
     cout << "Не выполнено задач: " << c.get_stat().failed_tasks << endl;
     cout << "Всего задач: " << c.get_stat().summary_tasks << endl;

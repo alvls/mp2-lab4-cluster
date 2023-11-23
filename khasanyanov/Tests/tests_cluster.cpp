@@ -19,7 +19,7 @@ TEST(Cluster, cant_create_cluster_with_negative_params) {
 
 TEST(Cluster, can_start_work) {
 	Cluster c;
-	ASSERT_NO_THROW(c.start());
+	ASSERT_NO_THROW(c.start(0));
 }
 
 TEST(Cluster, can_get_stat) {

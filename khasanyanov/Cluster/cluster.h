@@ -36,13 +36,14 @@ public:
 	Cluster();								// конструктор по умолчанию
 	Cluster(size_t N, size_t T);			// конструктор-инициализатор
 	Cluster(size_t N, size_t T, double L);	// конструктор-инициализатор
-	void start(function<void(void)>& f);	// запуск работы кластера
+	void start(const function<void(void)>& f);	// запуск работы кластера
 											//геттеры
 	size_t get_nodes() const noexcept;		
 	size_t get_tacts() const noexcept;		
 	size_t get_busy_nodes() const noexcept; 
 	double get_lambda() const noexcept;
 	vector<Task> get_tasks() const;
+	Queue<Task> get_queue() const; 
 	Statistic get_stat() const;
 };
 

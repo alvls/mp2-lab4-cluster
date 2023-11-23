@@ -1,12 +1,29 @@
 #include "console.h"
 
-Console::Console() {
+
+HANDLE Console::hConsole = nullptr;
+
+CONSOLE_SCREEN_BUFFER_INFO Console::buf_info = {};
+
+CHAR_INFO* Console::buf = nullptr;
+
+int Console::buf_size = 0;
+
+COORD Console::buf_coord = { 0, 0 };
+
+int Console::background = BLACK;
+
+int Console::foreground = LIGHTGRAY;
+
+int Console::attr = Console::background * 16 + Console::foreground;
+
+void Console::init() {
     hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     GetConsoleScreenBufferInfo(hConsole, &buf_info);
-    buf = new CHAR_INFO[buf_size = buf_info.dwSize.X * buf_info.dwSize.Y];
+    buf = new CHAR_INFO[buf_size = buf_info.dwSize.X * buf_info.dwSize.Y * sizeof(wchar_t)];
 }
 
-Console::~Console() {
+void Console::free() {
     delete[] buf;
 }
 

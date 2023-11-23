@@ -6,12 +6,11 @@
 
 class Visualizer {
 	Cluster cluster;
-	Console console;
 	void draw_cluster_load();
 	void draw_status_fields();
 public:
 	void draw();
-	Visualizer(Cluster c, Console con);
+	Visualizer(const Cluster& c);
 };
 
 
