@@ -29,8 +29,8 @@ public:
 	void  erase(int index);					// удалить элемент по индексу
 	void insert(int index,const TELEM& el); // вставить элемент по индексу
 	TELEM operator[](const size_t index);   // получить значение элемента по индексу
-	                                        // геттеры
-	TELEM& get_front();						
+	                                        
+	TELEM& get_front();						// геттеры
 	TELEM& get_back();						
 	size_t get_size();						
 };

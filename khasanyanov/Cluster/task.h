@@ -18,8 +18,8 @@ public:
 	Task(size_t Nodes);					// конструктор-инициализатор
 	void work();						// отработка задачи за один такт
 	bool is_closed() const noexcept;	// выполнена ли задача
-	                                    // геттеры
-	size_t get_nodes() const noexcept;	
+	                                    
+	size_t get_nodes() const noexcept;	// геттеры
 	size_t get_tacts() const noexcept;	
 	size_t get_number() const noexcept; 
 };

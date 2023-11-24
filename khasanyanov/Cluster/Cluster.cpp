@@ -10,7 +10,7 @@ Cluster::Cluster(size_t N, size_t T): nodes(N), tacts(T), busy_nodes(0) {
 }
 
 Cluster::Cluster(size_t N, size_t T, double L) : nodes(N), tacts(T), busy_nodes(0), lambda(L) { 
-	if (N <= 0 || N > MaxValueOfNodes || T <= 0 || lambda <= 0) throw invalid_argument("invalid params"); 
+	if (N <= 0 || N > MaxValueOfNodes || T <= 0 || lambda < 0 || lambda > 1) throw invalid_argument("invalid params"); 
 }
 
 size_t Cluster::get_nodes() const noexcept { return nodes; }
