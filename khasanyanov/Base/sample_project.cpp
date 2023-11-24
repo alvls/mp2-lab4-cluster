@@ -27,7 +27,8 @@ void main()
     Cluster c(nodes, tacts, lambda);
     Visualizer v(c);
     Console::hidecursor();
-    c.start([&]() {Console::clear(); v.draw(0,0); Console::flush(); Sleep(10); });
+    c.start([&]() {Console::clear(); v.draw(0,0); Console::flush(); Sleep(50); });
     v.draw_result(0, 0);
-    Console::gotoxy(0, 6);
+    Console::gotoxy(0, 7);
+    Console::free();
 }

@@ -38,11 +38,12 @@ void Visualizer::draw(int x, int y){
 
 void Visualizer::draw_result(int x, int y){
 	Console::clear();
-	Console::write(x + 0, y + 0,L"Выполнено задач: " + to_wstring(cluster.get_stat().executed_tasks));
-	Console::write(x + 0, y + 1,L"Не выполнено задач: " + to_wstring( cluster.get_stat().failed_tasks));
-	Console::write(x + 0, y + 2,L"Всего задач: " + to_wstring( cluster.get_stat().summary_tasks));
-	Console::write(x + 0, y + 3,L"Тактов простоя: " + to_wstring( cluster.get_stat().free_tacts));
-	Console::write(x + 0, y + 4,L"Средняя загрузка кластера: " + to_wstring(cluster.get_stat().I * 100.) + L"%");
+	Console::write(x + 0, y + 0, L"Тактов работы: " + to_wstring(cluster.get_tacts()));
+	Console::write(x + 0, y + 1,L"Выполнено задач: " + to_wstring(cluster.get_stat().executed_tasks));
+	Console::write(x + 0, y + 2,L"Не выполнено задач: " + to_wstring( cluster.get_stat().failed_tasks));
+	Console::write(x + 0, y + 3,L"Всего задач: " + to_wstring( cluster.get_stat().summary_tasks));
+	Console::write(x + 0, y + 4,L"Тактов простоя: " + to_wstring( cluster.get_stat().free_tacts));
+	Console::write(x + 0, y + 5,L"Средняя загрузка кластера: " + to_wstring(cluster.get_stat().I * 100.) + L"%");
 	Console::flush();
 }
 
