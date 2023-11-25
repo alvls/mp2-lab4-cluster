@@ -9,9 +9,8 @@ const size_t MaxTactsOfTask = 6;
 using namespace std;
 
 class Task {							
-	size_t number, 						// номер задачи
-	tacts, 								// кол-во тактов для выполнения
-	nodes;								// кол-во занимаемых узлов
+	size_t tacts;					    // кол-во тактов для выполнения
+	size_t nodes;						// кол-во занимаемых узлов
 	bool closed;						// состояние задачи
 public:									
 	Task();								// конструктор по умолчанию
@@ -21,7 +20,6 @@ public:
 	                                    
 	size_t get_nodes() const noexcept;	// геттеры
 	size_t get_tacts() const noexcept;	
-	size_t get_number() const noexcept; 
 };
 
 #endif

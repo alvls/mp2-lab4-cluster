@@ -25,7 +25,7 @@ vector<Task> Cluster::get_tasks() const { return tasks; }
 
 Queue<Task> Cluster::get_queue() const { return queue; }
 
-void Cluster::start(const function<void(void)>& f) {
+void Cluster::start(func f) {
 	for(statistic.T ; statistic.T < tacts + 1; statistic.T++) {
 		generate_tasks();
 		process_tasks();

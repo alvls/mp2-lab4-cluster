@@ -63,3 +63,5 @@ void Visualizer::draw_result(int x, int y) {
 	Console::write(x + 27, y + 5, to_wstring(cluster.get_stat().I * 100.) + L"%");
 	Console::flush();
 }
+
+

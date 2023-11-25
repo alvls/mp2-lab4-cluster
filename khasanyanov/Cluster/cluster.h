@@ -6,9 +6,9 @@
 #include <vector>
 #include <functional>
 
-
-
 using namespace std;
+
+typedef const function<void(void)>& func;
 
 class Cluster {
 	struct Statistic {						   // статистика работы кластера
@@ -37,7 +37,7 @@ public:
 	Cluster();								   // конструктор по умолчанию
 	Cluster(size_t N, size_t T);			   // конструктор-инициализатор
 	Cluster(size_t N, size_t T, double L);	   // конструктор-инициализатор
-	void start(const function<void(void)>& f); // запуск работы кластера
+	void start(func f);                        // запуск работы кластера
 											   
 	size_t get_nodes() const noexcept;		   //геттеры
 	size_t get_tacts() const noexcept;		
