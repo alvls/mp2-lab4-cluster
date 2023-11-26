@@ -2,11 +2,9 @@
 #include <iostream>
 #include <cstdlib>
 
-// Конструктор симуляции
 Simulation::Simulation(int Nodes, double L, int k)
 	: cluster(Nodes), N(Nodes), L(L), k(k), T(0), gen(rd()), dis(0.0, 1.0) {}
 
-// Генерация задач
 void Simulation::generateTasks() {
 	for (int i = 0; i < k; ++i) {
 		if (dis(gen) < L) {
@@ -17,7 +15,7 @@ void Simulation::generateTasks() {
 	}
 }
 
-// Обработка одного такта симуляции
+// Обработка такта
 void Simulation::processTact() {
 	generateTasks();
 	cluster.updateTasks();

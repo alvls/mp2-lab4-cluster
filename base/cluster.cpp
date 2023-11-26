@@ -66,8 +66,6 @@ void Cluster::updateTasks() {
 	uncompletedTask = totalTasks - completedTask;
 }
 
-
-
 // Получение процентной загрузки кластера
 double Cluster::getLoadPercentage() const {
 	int busyCount = 0;
@@ -86,13 +84,10 @@ int Cluster::getBusyNodeCount() const {
 	return count;
 }
 
-// Обновление счетчиков задач
-void Cluster::updateLoadPercent(double load) { totalLoadPercent += load; }
-
-
 // Получение статистики задач
 int Cluster::getCurrentTaskCount() const { return progressTask; }
 int Cluster::getTasksCompleted() const { return completedTask; }
 int Cluster::getTasksUncompleted() const { return uncompletedTask; }
 int Cluster::getTotalTasks() const { return totalTasks; }
 double Cluster::getAverageLoadPercent(int T) const { return totalLoadPercent / T; }
+void Cluster::updateLoadPercent(double load) { totalLoadPercent += load; }
