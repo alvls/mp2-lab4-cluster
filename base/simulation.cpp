@@ -31,9 +31,6 @@ void Simulation::displayState() {
 	cout << "Количество исполняемых задач: " << cluster.getCurrentTaskCount() << endl;
 	cout << "Количество занятых узлов: " << cluster.getBusyNodeCount() << endl;
 	cout << "Число задач в очереди: " << cluster.taskQueue.getSize() << endl << endl;
-	cout << "Число выполненных задач: " << cluster.getTasksCompleted() << endl;
-	cout << "Число невыполненных задач: " << cluster.getTasksUncompleted() << endl;
-	cout << "Общее число задач: " << cluster.getTotalTasks() << endl << endl;
 }
 
 // Отображение итоговой статистики симуляции
