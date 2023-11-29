@@ -1,12 +1,12 @@
 #include "queue.h"
 #include <gtest.h>
 
-TEST(TQueue, can_create_stack)
+TEST(TQueue, can_create_queue)
 {
 	ASSERT_NO_THROW(TQueue<int> que);
 }
 
-TEST(TQueue, cant_create_stack_with_negative_size)
+TEST(TQueue, cant_create_queue_with_negative_size)
 {
 	ASSERT_ANY_THROW(TQueue<int> que(-10));
 }
