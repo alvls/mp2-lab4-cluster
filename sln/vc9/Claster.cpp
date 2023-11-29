@@ -10,6 +10,8 @@ public:
 		Task tmp;
 		while (New_tasks.GetSize() != 0) {
 			tmp = New_tasks.WatchFirst();
+			if (tmp.number_of_nodes > 64)
+				throw "TooBigTask";
 			if (tmp.number_of_nodes < free_nodes) {
 				tmp = New_tasks.Pop()->date;
 				OngoingTasks.push_back(tmp);
@@ -20,15 +22,26 @@ public:
 		return New_tasks;
 	}
 	void maketakt() {
+		std::vector<Task> NewOnGoingTasks;
 		for (int i = 0; i < OngoingTasks.size(); i++) {
-			OngoingTasks[i].time -= 1;
-			if (OngoingTasks[i].time == 0) {
-				OngoingTasks.erase(OngoingTasks.begin() + i);
+			OngoingTasks[i].time -= 1; 
+			if (OngoingTasks[i].time != 0) {
+				NewOnGoingTasks.push_back(OngoingTasks[i]);
+			}else{
 				MakeTask += 1;
-				free_nodes += OngoingTasks[i].number_of_nodes;
 			}
 		}
-		statistic.push_back(free_nodes / 64);
+		OngoingTasks = NewOnGoingTasks;
+		double val = free_nodes / 64.;
+		statistic.push_back(val);
 	}
 	int GetMakeTask() { return MakeTask; }
+	int GetSize() { return OngoingTasks.size(); }
+	double GetWorkload() {
+		double sum = 0;
+		for (int i = 0; i < statistic.size(); i++) {
+			sum += statistic[i];
+		}
+		return sum / statistic.size();
+	}
 };

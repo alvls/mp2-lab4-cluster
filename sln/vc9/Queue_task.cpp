@@ -1,41 +1,41 @@
 #pragma once
 struct Task
 {
-	int time;
-	int number_of_nodes;
+	int time=0;
+	int number_of_nodes=0;
 };
 struct Node {
 	Task date;
 	Node* pNext;
 	Node(Task _val) : date(_val), pNext(nullptr) {}
+	Task GetDate() { return date; }
 };
 
 class Queue_task
 {
 	size_t size = 0;
-	Node* pFirst;
-	Node* pLast;
+	Node* pFirst=nullptr;
+	Node* pLast=nullptr;
 public:
 	Node* Pop() {
-		size--;
 		Node* tmp;
 		if (pFirst == nullptr)
 			throw "No elements on Queue";
 		tmp = pFirst;
 		pFirst = pFirst->pNext;
-		return pFirst;
+		size--;
+		return tmp;
 	}
 	void Push(Task new_task) {
 		Node* tmp1 = new Node(new_task);
+		size++;
 		if (pFirst == nullptr) {
 			pFirst = tmp1;
 			pLast = tmp1;
+			return;
 		}
-		else {
-			pLast->pNext = tmp1;
-			pLast = tmp1;
-		}
-		size++;
+		pLast->pNext = tmp1;
+		pLast = tmp1;
 	}
 	Task WatchFirst() { return pFirst->date; }
 	size_t GetSize() { return size; }

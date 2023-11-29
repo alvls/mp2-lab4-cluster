@@ -103,7 +103,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\test\test_main.cpp" />
+    <ClCompile Include="Test_TaskGenerator.cpp" />
     <ClCompile Include="Test_claster.cpp" />
+    <ClCompile Include="Test_queue_task.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\utmatrix.h" />

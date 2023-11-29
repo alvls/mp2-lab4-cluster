@@ -22,15 +22,15 @@ void main() {
 		switch (c)
 		{
 		case'1':
-			TG.createTask();
-			tasks = TG.GetTasks();
+			tasks = TG.createTask(tasks);
 			tasks = Cl.SetTask(tasks);
 			Cl.maketakt();
 			break;
 		case '2':
-			cout << "Number of takts:      " << i << endl;
-			cout << "Number of make tasks: " << Cl.GetMakeTask() << endl;
-
+			cout << "Number of takts:                       " << i << endl;
+			cout << "Number of make tasks:                  " << Cl.GetMakeTask() << endl;
+			cout << "Number of dont make tasks:             " << TG.getSize() + Cl.GetSize()<<endl;
+			cout << "Total percentage of workload workload: " << Cl.GetWorkload()<<endl;
 		default:
 			break;
 		}

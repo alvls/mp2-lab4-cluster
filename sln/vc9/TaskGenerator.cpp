@@ -8,7 +8,8 @@ class TaskGenerator {
 	Queue_task Tasks;
 public:
 	TaskGenerator(double _p) { p = _p; }
-	void createTask() {
+	Queue_task createTask(Queue_task tas) {
+		Tasks = tas;
 		srand(time(0));
 		double chanse;
 		Task tmp;
@@ -20,8 +21,11 @@ public:
 				Tasks.Push(tmp);
 			}
 		}
+		return Tasks;
 	}
+
 	Queue_task GetTasks() { return Tasks; }
-	void SetTasks(Queue_task tmp) { Tasks = tmp; }
 	void ChangeP(double _p) { p = _p; }
+	double GetP() { return p; }
+	int getSize(){ return Tasks.GetSize(); }
 };
