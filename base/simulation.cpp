@@ -19,7 +19,7 @@ void Simulation::generateRandomTasks() {
          uniform_int_distribution<int> nodeDistribution(2, N);
          int t = timeDistribution(randomGenerator);
          int p = nodeDistribution(randomGenerator);
-         cluster.enqueueTask(Task(t, p));
+         cluster.enqueueTask(Task(p, t));
       }
    }
 }

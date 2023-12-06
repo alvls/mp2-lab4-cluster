@@ -3,14 +3,14 @@
 #include "cluster.cpp"
 #include "task.h"
 
-TEST(ClusterTest, clusterInitialization) {
+TEST(Cluster, cluster_initialization) {
    Cluster cluster(5);
 
    EXPECT_EQ(0, cluster.calculateBusyNodeCount());
    EXPECT_EQ(0, cluster.getTotalTaskCount());
 }
 
-TEST(ClusterTest, enqueueTaskIncreasesTotalNumberTasks) {
+TEST(Cluster, enqueue_task_increases_total_number_tasks) {
    Cluster cluster(5);
    Task task(5, 5);
    cluster.enqueueTask(task);
@@ -19,7 +19,7 @@ TEST(ClusterTest, enqueueTaskIncreasesTotalNumberTasks) {
    EXPECT_EQ(0, cluster.getCompletedTaskCount());
 }
 
-TEST(ClusterTest, updateTheTasksAndFinishTheTask) {
+TEST(Cluster, update_the_tasks_and_finish_the_task) {
    Cluster cluster(5);
    Task task(1, 1);
    cluster.enqueueTask(task);
@@ -31,7 +31,7 @@ TEST(ClusterTest, updateTheTasksAndFinishTheTask) {
    EXPECT_EQ(0, cluster.calculateBusyNodeCount());
 }
 
-TEST(ClusterTest, calculateThePercentageOfLoad) {
+TEST(Cluster, calculate_the_percentage_of_load) {
    Cluster cluster(10);
    Task task(2, 2);
    cluster.enqueueTask(task);
@@ -40,7 +40,7 @@ TEST(ClusterTest, calculateThePercentageOfLoad) {
    EXPECT_EQ(20.0, cluster.calculateLoadPercentage());
 }
 
-TEST(ClusterTest, assignTasksWhenThereEnoughNodes) {
+TEST(Cluster, assign_tasks_when_there_enough_nodes) {
    Cluster cluster(5);
    Task task(5, 5);
    cluster.enqueueTask(task);
@@ -50,7 +50,7 @@ TEST(ClusterTest, assignTasksWhenThereEnoughNodes) {
    EXPECT_EQ(1, cluster.getCurrentTaskCount());
 }
 
-TEST(ClusterTest, assignTasksWhenThereNotEnoughNodes) {
+TEST(Cluster, assign_tasks_when_there_not_enough_nodes) {
    Cluster cluster(3);
    Task task(5, 5);
    cluster.enqueueTask(task);
