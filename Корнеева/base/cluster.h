@@ -40,6 +40,9 @@ private:
 	TQueue<Task> waiting_queue;          // Очередь ожидания задач
 	TQueue<Task> processing_queue;       // Очередь задач на выполнении
 
+	float total_load;                    // Переменная для вычисления суммы нагрузки на кадом такте
+	size_t T;                            // Количество тактов
+
 public:
 	// Конструктор, устанавливает общее количество узлов
 	explicit TCluster(size_t nodes); 

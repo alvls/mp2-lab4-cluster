@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 TCluster::TCluster(size_t nodes)
-	: nodes(nodes), nodes_free(nodes), total_tasks(0), completed_tasks(0)
+	: nodes(nodes), nodes_free(nodes), total_tasks(0), completed_tasks(0), total_load(0.0), T(0)
 {
 	if (nodes < 16 || nodes > 64) 
 	{
@@ -48,7 +48,6 @@ void TCluster::generate_tasks(float alpha, int k, int max_tacts)
 }
 void TCluster::process()
 {
-
 	while (!waiting_queue.empty() && waiting_queue.peek().required_nodes <= nodes_free)
 	{
 		auto waiting_task = waiting_queue.dequeue();
@@ -76,6 +75,9 @@ void TCluster::process()
 			processing_queue.dequeue();
 		}
 	}
+
+	total_load += get_cluster_load();
+	T++;
 }
 
 float TCluster::get_cluster_load() const
@@ -89,7 +91,11 @@ TCluster::Statistics TCluster::get_statistics() const
 	stats.time_of_working = total_tasks;
 	stats.count_of_completed = completed_tasks;
 	stats.count_of_incompleted = total_tasks - completed_tasks;
-	stats.cluster_load = (nodes - nodes_free) * 100.0 / nodes;
+
+	if (total_tasks > 0)
+		stats.cluster_load = total_load / T;
+	else
+		stats.cluster_load = 0.0;
 
 	return stats;
 }
