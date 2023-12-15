@@ -92,7 +92,7 @@ TCluster::Statistics TCluster::get_statistics() const
 	stats.count_of_completed = completed_tasks;
 	stats.count_of_incompleted = total_tasks - completed_tasks;
 
-	if (total_tasks > 0)
+	if (T > 0)
 		stats.cluster_load = total_load / T;
 	else
 		stats.cluster_load = 0.0;
