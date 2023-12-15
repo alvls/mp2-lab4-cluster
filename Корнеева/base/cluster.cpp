@@ -6,7 +6,8 @@
 TCluster::TCluster(size_t nodes)
 	: nodes(nodes), nodes_free(nodes), total_tasks(0), completed_tasks(0)
 {
-	if (nodes < 16 || nodes > 64) {
+	if (nodes < 16 || nodes > 64) 
+	{
 		throw std::invalid_argument("Некорректное количество узлов (должно быть от 16 до 64)");
 	}
 
@@ -15,17 +16,17 @@ TCluster::TCluster(size_t nodes)
 
 void TCluster::generate_tasks(float alpha, int k, int max_tacts)
 {
-	if (alpha <= 0.0 || alpha >= 1.0) 
+	if (alpha <= 0.0 || alpha >= 1.0)
 	{
 		throw std::invalid_argument("Некорректное число alpha (должно быть в диапазоне от 0 до 1)");
 	}
 
-	if (max_tacts < 1) 
+	if (max_tacts < 1)
 	{
 		throw std::invalid_argument("Максимальное время выполнения одного задания должно быть не менее 1");
 	}
 
-	if (k < 1) 
+	if (k < 1)
 	{
 		throw std::invalid_argument("Число k должно быть не менее 1");
 	}
@@ -37,7 +38,7 @@ void TCluster::generate_tasks(float alpha, int k, int max_tacts)
 		{
 			Task new_task;
 			new_task.tacts = rand() % max_tacts + 1;
-			new_task.required_nodes = rand() % nodes + 1; 
+			new_task.required_nodes = rand() % nodes + 1;
 			new_task.status = Task::Waiting;
 			tasks.push_back(new_task);
 			waiting_queue.enqueue(new_task);
@@ -45,29 +46,23 @@ void TCluster::generate_tasks(float alpha, int k, int max_tacts)
 		}
 	}
 }
-
 void TCluster::process()
 {
-	while (!waiting_queue.empty())
+
+	while (!waiting_queue.empty() && waiting_queue.peek().required_nodes <= nodes_free)
 	{
-		auto& task = waiting_queue.peek(); 
-		if (task.required_nodes <= nodes_free)
-		{
-			nodes_free -= task.required_nodes;
-			waiting_queue.dequeue();
-			task.status = Task::Processing;
-			processing_queue.enqueue(task);
-		}
-		else
-		{
-			break;
-		}
+		auto waiting_task = waiting_queue.dequeue();
+		nodes_free -= waiting_task.required_nodes;
+		waiting_task.status = Task::Processing;
+		processing_queue.enqueue(waiting_task);
 	}
+
 
 	for (size_t i = processing_queue.size(); i-- > 0;)
 	{
 		auto& task = processing_queue.peek();
 		task.tacts--;
+
 		if (task.tacts == 0)
 		{
 			nodes_free += task.required_nodes;
@@ -82,6 +77,7 @@ void TCluster::process()
 		}
 	}
 }
+
 float TCluster::get_cluster_load() const
 {
 	return 100.0 * (nodes - nodes_free) / nodes;
