@@ -10,14 +10,14 @@ using namespace std;
 class Cluster_manager
 {
 private:
-	int N; //кол-во вычислительных узлов(доступное)
-	int Nmax; //кол-во вычислительных узлов(максимальное)
-	double alpha; //вероятность появления заданий
-	int tacts; //max тактов на выполнение
-	int thistact; //текущий такт
+	int N; //ГЄГ®Г«-ГўГ® ГўГ»Г·ГЁГ±Г«ГЁГІГҐГ«ГјГ­Г»Гµ ГіГ§Г«Г®Гў(Г¤Г®Г±ГІГіГЇГ­Г®ГҐ)
+	int Nmax; //ГЄГ®Г«-ГўГ® ГўГ»Г·ГЁГ±Г«ГЁГІГҐГ«ГјГ­Г»Гµ ГіГ§Г«Г®Гў(Г¬Г ГЄГ±ГЁГ¬Г Г«ГјГ­Г®ГҐ)
+	double alpha; //ГўГҐГ°Г®ГїГІГ­Г®Г±ГІГј ГЇГ®ГїГўГ«ГҐГ­ГЁГї Г§Г Г¤Г Г­ГЁГ©
+	int tacts; //max ГІГ ГЄГІГ®Гў Г­Г  ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГҐ
+	int thistact; //ГІГҐГЄГіГ№ГЁГ© ГІГ ГЄГІ
 	vector<Task> process;
 	TQueue<Task> qu;
-	int countTasks; //кол-во выполненных заданий
+	int countTasks; //ГЄГ®Г«-ГўГ® ГўГ»ГЇГ®Г«Г­ГҐГ­Г­Г»Гµ Г§Г Г¤Г Г­ГЁГ©
 	int countfail = 0;
 	bool end = false;
 
@@ -38,11 +38,11 @@ public:
 	}
 	int finishedTasks() { return countTasks; }
 	int failedTasks() { return qu.Size() + countfail; }
-	void Computation() {
+	void Computation(double alph) {
 		//TQueue<Task> qu;
 		//while (tacts != 0) {
 			generateAlpha();
-			if (alpha * 100.0 > 50.0) {
+			if (alpha > alph) {
 				Task tsk(Nmax);
 				if (tsk.getNode() <= N) {
 					if (qu.IsEmpty()) {
@@ -73,7 +73,7 @@ public:
 					qu.enqueue(tsk);
 				}
 			}
-			if (alpha * 100.0 < 50.0) {
+			if (alpha < alph) {
 				if (!(qu.IsEmpty())) {
 					if (qu.peek().getNode() <= N) {
 						process.push_back(qu.peek());
@@ -83,7 +83,7 @@ public:
 				}
 			}
 			for (int i = 0; i < process.size(); i ++) {
-				if (process[i].getTaсt() == 0) {
+				if (process[i].getTaГ±t() == 0) {
 					N += process[i].getNode();
 					process.erase(process.begin() + i);
 					//vector<Task>(process).swap(process);
@@ -109,11 +109,11 @@ public:
 
 ostream& operator<<(ostream& os, const Cluster_manager& T)
 {
-	return os << "Осталось тактов: " << T.tacts << endl << "Всего узлов: " << T.Nmax << endl
-		<< "Вероятность появления задания: " << T.alpha << endl
-		<< "Выполненных заданий: " << T.countTasks << endl
-		<< "Доступное кол-во узлов: " << T.N << endl
-		<< "Заданий выполняется: " << T.process.size() << endl
-		<< "Загрузка кластера = " << (((double(T.Nmax) - double(T.N)) / double(T.Nmax))*100.0) << "%" << endl;
+	return os << "ГЋГ±ГІГ Г«Г®Г±Гј ГІГ ГЄГІГ®Гў: " << T.tacts << endl << "Г‚Г±ГҐГЈГ® ГіГ§Г«Г®Гў: " << T.Nmax << endl
+		<< "Г‚ГҐГ°Г®ГїГІГ­Г®Г±ГІГј ГЇГ®ГїГўГ«ГҐГ­ГЁГї Г§Г Г¤Г Г­ГЁГї: " << T.alpha << endl
+		<< "Г‚Г»ГЇГ®Г«Г­ГҐГ­Г­Г»Гµ Г§Г Г¤Г Г­ГЁГ©: " << T.countTasks << endl
+		<< "Г„Г®Г±ГІГіГЇГ­Г®ГҐ ГЄГ®Г«-ГўГ® ГіГ§Г«Г®Гў: " << T.N << endl
+		<< "Г‡Г Г¤Г Г­ГЁГ© ГўГ»ГЇГ®Г«Г­ГїГҐГІГ±Гї: " << T.process.size() << endl
+		<< "Г‡Г ГЈГ°ГіГ§ГЄГ  ГЄГ«Г Г±ГІГҐГ°Г  = " << (((double(T.Nmax) - double(T.N)) / double(T.Nmax))*100.0) << "%" << endl;
 
 }
