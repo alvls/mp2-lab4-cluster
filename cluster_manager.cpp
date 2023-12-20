@@ -13,6 +13,7 @@ private:
 	int N; //êîë-âî âû÷èñëèòåëüíûõ óçëîâ(äîñòóïíîå)
 	int Nmax; //êîë-âî âû÷èñëèòåëüíûõ óçëîâ(ìàêñèìàëüíîå)
 	double alpha; //âåðîÿòíîñòü ïîÿâëåíèÿ çàäàíèé
+	int busyNodes;
 	int tacts; //max òàêòîâ íà âûïîëíåíèå
 	int thistact; //òåêóùèé òàêò
 	vector<Task> process;
@@ -30,6 +31,7 @@ public:
 		if (T < 0) throw "invalid tacts";
 		tacts = T;
 		thistact = 0;
+		busyNodes = 0;
 		srand(time(NULL));
 		generateAlpha();
 		countTasks = 0;
@@ -93,12 +95,16 @@ public:
 					process[i].eraseTacts();
 				if (i = process.size()) break;
 			}
+			busyNodes += (Nmax - N);
 			tacts--;
 			thistact++;
 		//}
 			if (tacts == 0)
 				end = true;
 			countfail = process.size();
+	}
+	double loadNodes(int Tmax) {
+	return ((double)busyNodes / (double)(Nmax * Tmax))*100.0;
 	}
 	bool Finish() {
 		return end;
