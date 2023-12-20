@@ -13,13 +13,10 @@
     <ClCompile Include="..\..\test\test_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test_claster.cpp">
+    <ClCompile Include="Test_Polinom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Test_queue_task.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Test_TaskGenerator.cpp">
+    <ClCompile Include="Test_MyList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

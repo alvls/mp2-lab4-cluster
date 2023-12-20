@@ -10,16 +10,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TaskGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Queue_task.cpp">
+    <ClCompile Include="MyList.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Claster.cpp">
+    <ClCompile Include="Polinom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
