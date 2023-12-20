@@ -1,57 +1,40 @@
 #include <iostream>
-#include <string>
-#include "Polinom.cpp"
+#include "TaskGenerator.cpp"
+#include "Queue_task.cpp"
+#include "Claster.cpp"
 using namespace std;
 void main() {
-	bool flag = true;
-	int ans;
-	int x, y, z;
-	string polynomial;
-	cout << "Enter polinon \n";
-	cin >> polynomial;
-	Polinom polin(polynomial);
-	while (flag)
-	{
-		cout << "1 - Print polynomial\n";
-		cout << "2 - Solve polynomial\n";
-		cout << "3 - Bring similar ones in a polynomial\n";
-		cout << "4 - Addition of polynomials\n";
-		cout << "5 - Multiplication of polynomials\n";
-		cout << "6 - Exit\n";
-		cin >> ans;
-		switch (ans)
+	char c;
+	double p;
+	Queue_task tasks;
+	Claster Cl;
+	int Max_takt;
+	cout << "Enter p ";
+	cin >> p;
+	TaskGenerator TG(p);
+	cout << "Enter max Takt ";
+	cin >> Max_takt;
+	for (int i = 0; i < Max_takt; i++) {
+		cout << "1 - Next takt \n";
+		cout << "2 - End and watch statistic\n";
+		cout << "3 - change p\n";
+		cin >> c;
+		switch (c)
 		{
-		case 1:
-			cout << polin.prPolinom() << endl;
+		case'1':
+			tasks = TG.createTask(tasks);
+			tasks = Cl.SetTask(tasks);
+			Cl.maketakt();
 			break;
-		case 2:
-			cout << "Enter x" << endl;
-			cin >> x;
-			cout << "Enter y" << endl;
-			cin >> y;
-			cout << "Enter z" << endl;
-			cin >> z;
-			cout << polin.Calculate(x, y, z) << endl;
-			break;
-		case 3:
-			polin.BringSimular();
-			cout << polin.prPolinom();
-			break;
-		case 4:
-			cout << "Enter polinon \n";
-			cin >> polynomial;
-			polin.aditional(Polinom(polynomial));
-			cout << polin.prPolinom();
-		case 5:
-			cout << "Enter polinon \n";
-			cin >> polynomial;
-			polin.Multiplication(Polinom(polynomial));
-			cout << polin.prPolinom();
-		case 6:
-			flag = false;
-			break;
+		case '2':
+			cout << "Number of takts:                       " << i << endl;
+			cout << "Number of make tasks:                  " << Cl.GetMakeTask() << endl;
+			cout << "Number of dont make tasks:             " << TG.getSize() + Cl.GetSize()<<endl;
+			cout << "Total percentage of workload workload: " << Cl.GetWorkload()<<endl;
 		default:
 			break;
 		}
+
 	}
 }
+
