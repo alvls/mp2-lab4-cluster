@@ -22,5 +22,6 @@ int main(){
 	}
 	cout << "Âûïîëíåííûõ çàäàíèé " << cl.finishedTasks() << endl;
 	cout << "Íåâûïîëíåííûõ çàäàíèé " << cl.failedTasks();
+	cout << "Загрузка кластера " << cl.loadNodes(Tmax) <<"%";
 	return 0;
 }
